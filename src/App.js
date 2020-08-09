@@ -1,6 +1,6 @@
 import React from "react"
 import "./App.css"
-import { BrowserRouter as Router } from "react-router-dom"
+import { BrowserRouter as Router, Link } from "react-router-dom"
 import Route from "react-router-dom/Route"
 
 const User = ({ match }) => {
@@ -11,6 +11,21 @@ const App = () => {
 	return (
 		<Router>
 			<div className="App">
+				<ul>
+					<li>
+						<Link to="/"> Home</Link>
+					</li>
+					<li>
+						<Link to="/about"> About</Link>
+					</li>
+					<li>
+						<Link to="/user/peter"> User Peter</Link>
+					</li>
+					<li>
+						<Link to="/user/john"> User John</Link>
+					</li>
+				</ul>
+
 				<Route
 					path="/"
 					exact
@@ -21,7 +36,7 @@ const App = () => {
 				/>
 
 				<Route
-					path="/about/"
+					path="/about"
 					exact
 					strict
 					render={() => {
