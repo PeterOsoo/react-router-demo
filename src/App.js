@@ -1,13 +1,19 @@
-import React from "react"
+import React, { useState } from "react"
 import "./App.css"
-import { BrowserRouter as Router, Link, NavLink } from "react-router-dom"
+import {
+	BrowserRouter as Router,
+	Link,
+	NavLink,
+	Redirect,
+} from "react-router-dom"
 import Route from "react-router-dom/Route"
 
-const User = ({ match }) => {
-	return <h1>Welcome User {match.params.username} </h1>
+const User = ({ params }) => {
+	return <h1>Welcome User {params.username} </h1>
 }
 
 const App = () => {
+	const [loggedIn, setLoggedIn] = useState(false)
 	return (
 		<Router>
 			<div className="App">
@@ -38,6 +44,13 @@ const App = () => {
 					</li>
 				</ul>
 
+				{/* button  */}
+				<input
+					type="button"
+					value={loggedIn ? "logout" : "login"}
+					onClick={() => setLoggedIn(!false)}
+				/>
+
 				<Route
 					path="/"
 					exact
@@ -56,7 +69,18 @@ const App = () => {
 					}}
 				/>
 
-				<Route path="/user/:username" exact strict component={User} />
+				<Route
+					path="/user/:username"
+					exact
+					strict
+					render={({ match }) =>
+						loggedIn ? (
+							<User username={match.params.username} />
+						) : (
+							<Redirect to="/" />
+						)
+					}
+				/>
 			</div>
 		</Router>
 	)
